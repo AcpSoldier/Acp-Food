@@ -70,8 +70,6 @@ public class Events implements Listener {
 						e.setCancelled(true);
 					}
 				}
-				else {
-				}
 			}
 		}
 	}
