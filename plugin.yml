@@ -1,6 +1,17 @@
 name: AcpFood
-version: 2.0
+version: 2.0.1
 main: tk.AcpSoldier.Main
 commands:
   acpfood:
     description: The main command for AcpFood.  Type it for a list of commands.
+permissions:
+  acpfood.other.refill:
+    description: Players with this permission can auto-refill food.
+  acpfood.foods.*:
+    description: Players with this permission can eat all foods.
+  acpfood.foods.cannedbeans:
+    description: Players with this permission can eat Canned Beans.
+  acpfood.foods.cannedpasta:
+    description: Players with this permission can eat Canned Pasta.
+  acpfood.foods.pepsi:
+    description: Players with this permission can drink Pepsi.

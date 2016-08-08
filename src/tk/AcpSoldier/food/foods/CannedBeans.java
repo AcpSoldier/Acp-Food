@@ -21,10 +21,11 @@ public class CannedBeans extends Food {
 
 	public CannedBeans(Main main) {
 
-		super("Canned Beans", 5, 5, "&8Right click to eat!", "", "&9Canned Beans", true, 2, "acpfood.cannedbeans");
+		super("Canned Beans", 5, 5, "&8Right click to eat!", "", "&9Canned Beans", true, 2, "acpfood.foods.cannedbeans");
 		this.main = main;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
+		
 		if (foodFile.exists()) {
 			this.displayName = foodData.getString("Settings.DisplayName");
 			this.healAmount = foodData.getInt("Settings.HealAmount");

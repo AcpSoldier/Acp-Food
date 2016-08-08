@@ -21,10 +21,11 @@ public class Pepsi extends Food {
 
 	public Pepsi(Main main) {
 
-		super("Can of Pepsi", 1, 1, "&8Right click to drink!", "", "&9Canned Beans", true, 3, "acpfood.pepsi");
+		super("Can of Pepsi", 1, 1, "&8Right click to drink!", "", "&9Can of Pepsi", true, 3, "acpfood.foods.pepsi");
 		this.main = main;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
+		
 		if (foodFile.exists()) {
 			this.displayName = foodData.getString("Settings.DisplayName");
 			this.healAmount = foodData.getInt("Settings.HealAmount");

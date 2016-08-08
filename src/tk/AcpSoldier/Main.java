@@ -20,14 +20,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 
 		config = this.getConfig();
-		config.addDefault("Settings.Enabled", true);
-		config.addDefault("Settings.MaxHunger", 20);
-		config.addDefault("Settings.AutoRefillFood", true);
-		config.addDefault("Settings.AutoRefillMessage", "&6Food refilled!");
-		config.addDefault("Settings.EatDelay", 20);
-		config.addDefault("Settings.TurnItemsIntoFood", true);
-		config.options().copyDefaults(true);
-		saveConfig();
+		this.saveDefaultConfig();
 
 		Commands commands = new Commands(this);
 		FoodManager foodManager = new FoodManager(this);

@@ -52,7 +52,7 @@ public class Events implements Listener {
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
 
-		if (main.isPluginEnabled) {
+		if (main.isPluginEnabled && main.turnItemsIntoFood) {
 
 			Player p = e.getPlayer();
 			Item item = e.getItem();
@@ -60,14 +60,17 @@ public class Events implements Listener {
 			for (Food food : FoodManager.foods) {
 				if (item.getItemStack().getData().equals(food.getFood().getData())) {
 					if (!item.getName().equals(food.displayName)) {
+						
 						p.sendMessage("Setting " + item.getName() + " to " + food.fileName + ".");
 						ItemStack newFood = food.getFood();
 						newFood.setAmount(item.getItemStack().getAmount());
-						item.setItemStack(food.getFood());
+						
+						item.remove();
+						p.getInventory().addItem(newFood);
+						e.setCancelled(true);
 					}
 				}
 				else {
-					p.sendMessage("The item you picked up is already a food.");
 				}
 			}
 		}

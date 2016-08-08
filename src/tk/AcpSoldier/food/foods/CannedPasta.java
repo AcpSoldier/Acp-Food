@@ -21,10 +21,11 @@ public class CannedPasta extends Food {
 
 	public CannedPasta(Main main) {
 
-		super("Canned Pasta", 7, 7, "&8Right click to eat!", "", "&9Canned Pasta", true, 2, "acpfood.cannedpasta");
+		super("Canned Pasta", 7, 7, "&8Right click to eat!", "", "&9Canned Pasta", true, 2, "acpfood.foods.cannedpasta");
 		this.main = main;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
+		
 		if (foodFile.exists()) {
 			this.displayName = foodData.getString("Settings.DisplayName");
 			this.healAmount = foodData.getInt("Settings.HealAmount");

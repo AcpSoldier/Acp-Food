@@ -1,2 +1,33 @@
-# Acp Food Configuration File
-# Hey, thanks for supporting my plugin!
+#                \----------------------------------------------/
+#                |          AcpFood Configuration File          |
+#	             |		     	www.AcpSoldier.TK               |
+#                |           Current Version: v2.0.1            |
+#                /----------------------------------------------\
+
+#                 You can find all the different food settings
+#                inside of the "Foods" folder that was generated.
+#                 All timings are in ticks and all health/food
+#                     values are 1 per half heart/food bar.
+#                       Thanks for supporting my plugin.
+#                                 -AcpSoldier
+
+# NOTE: Make sure to reload/restart your server after changing any settings.
+
+Settings:
+# Enables/Disables the plugin.
+  Enabled: true
+
+# The maximum hunger (saturation) a player can have.
+  MaxHunger: 20
+
+# Refills the player's hot bar with more food from their inventory when they run out.
+  AutoRefillFood: true
+
+# Sends a message to the player to let them know their hotbot was refilled with food.
+  AutoRefillMessage: '&6Food refilled!'
+
+# How long before players can eat again. Values are in ticks. (20 ticks = 1 second)
+  EatDelay: 20
+
+# Attempts to turn all food items into actual food. (Example: Turns all Lapis Lazuli into Canned Beans automatically.)
+  TurnItemsIntoFood: true

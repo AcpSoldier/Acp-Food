@@ -66,7 +66,7 @@ public class FoodManager {
 				p.setItemInHand(new ItemStack(Material.AIR));
 
 				if (main.config.getBoolean("Settings.AutoRefillFood")) {
-					if (p.hasPermission("acpfood.refillfood")) {
+					if (p.hasPermission("acpfood.other.refill")) {
 						
 						if (p.getInventory().contains(food.getFood().getType(), 1)) {
 							
