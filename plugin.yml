@@ -1,0 +1,6 @@
+name: AcpFood
+version: 2.0
+main: tk.AcpSoldier.Main
+commands:
+  acpfood:
+    description: The main command for AcpFood.  Type it for a list of commands.
