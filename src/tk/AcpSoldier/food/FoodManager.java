@@ -16,6 +16,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import tk.AcpSoldier.Main;
 import tk.AcpSoldier.food.foods.CannedBeans;
+import tk.AcpSoldier.food.foods.CannedFish;
 import tk.AcpSoldier.food.foods.CannedPasta;
 import tk.AcpSoldier.food.foods.Pepsi;
 
@@ -29,6 +30,7 @@ public class FoodManager {
 
 	public static CannedBeans cannedBeans;
 	public static CannedPasta cannedPasta;
+	public static CannedFish cannedFish;
 	public static Pepsi pepsi;
 	
 	public static ArrayList<Food> foods = new ArrayList<Food>();
@@ -37,11 +39,13 @@ public class FoodManager {
 	public void setup() {
 		cannedBeans = new CannedBeans(main);
 		cannedPasta = new CannedPasta(main);
+		cannedFish = new CannedFish(main);
 		pepsi = new Pepsi(main);
 
 		foods.add(cannedBeans);
 		foods.add(cannedPasta);
-		foods.add(pepsi); //For some reason, there is no NullPointer for whatever food I add last.
+		foods.add(cannedFish);
+		foods.add(pepsi);
 	}
 
 	public void eatFood(Player p, Food food, Main main) {
