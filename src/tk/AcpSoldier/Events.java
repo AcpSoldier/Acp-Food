@@ -36,6 +36,11 @@ public class Events implements Listener {
 
 						if (p.getItemInHand().getItemMeta().equals(food.getFood().getItemMeta())) {
 							food.eatFood(p);
+							
+							//Prevent Mountain Dew from behaving like bone meal.
+							if(food.equals(FoodManager.mountainDew)) {
+								e.setCancelled(true);
+							}
 						}
 						else {
 							System.out.println("Ayyyy lmao!");
