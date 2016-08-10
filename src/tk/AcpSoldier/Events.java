@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
-
 import tk.AcpSoldier.food.Food;
 import tk.AcpSoldier.food.FoodManager;
 
@@ -36,21 +36,16 @@ public class Events implements Listener {
 
 						if (p.getItemInHand().getItemMeta().equals(food.getFood().getItemMeta())) {
 							food.eatFood(p);
-							
-							//Prevent Mountain Dew from behaving like bone meal.
-							if(food.equals(FoodManager.mountainDew)) {
+
+							// Prevents Mountain Dew from behaving like bone
+							// meal.
+							if (food.equals(FoodManager.mountainDew)) {
 								e.setCancelled(true);
 							}
-						}
-						else {
-							System.out.println("Ayyyy lmao!");
 						}
 					}
 				}
 			}
-		}
-		else {
-			e.getPlayer().sendMessage("Sorry, the plugin isn't enabled. :(");
 		}
 	}
 
@@ -73,6 +68,25 @@ public class Events implements Listener {
 						item.remove();
 						p.getInventory().addItem(newFood);
 						e.setCancelled(true);
+					}
+				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void onInventoryOpen(InventoryOpenEvent e) {
+
+		if (main.isPluginEnabled && main.turnItemsIntoFood) {
+
+			for (ItemStack item : e.getInventory().getContents()) {
+				if (item != null) {
+					for (Food food : FoodManager.foods) {
+						if (item.getData().equals(food.getFood().getData())) {
+
+							item.setItemMeta(food.getFood().getItemMeta());
+							e.getPlayer().sendMessage("Setting " + item.getItemMeta().getDisplayName() + " to " + food.fileName + ".");
+						}
 					}
 				}
 			}
