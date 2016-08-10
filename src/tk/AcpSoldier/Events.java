@@ -37,8 +37,7 @@ public class Events implements Listener {
 						if (p.getItemInHand().getItemMeta().equals(food.getFood().getItemMeta())) {
 							food.eatFood(p);
 
-							// Prevents Mountain Dew from behaving like bone
-							// meal.
+							// Prevents Mountain Dew from behaving like bone meal.
 							if (food.equals(FoodManager.mountainDew)) {
 								e.setCancelled(true);
 							}
@@ -54,20 +53,13 @@ public class Events implements Listener {
 
 		if (main.isPluginEnabled && main.turnItemsIntoFood) {
 
-			Player p = e.getPlayer();
 			Item item = e.getItem();
 
 			for (Food food : FoodManager.foods) {
 				if (item.getItemStack().getData().equals(food.getFood().getData())) {
-					if (!item.getName().equals(food.displayName)) {
+					if(!item.getItemStack().hasItemMeta()) {
 						
-						p.sendMessage("Setting " + item.getName() + " to " + food.fileName + ".");
-						ItemStack newFood = food.getFood();
-						newFood.setAmount(item.getItemStack().getAmount());
-						
-						item.remove();
-						p.getInventory().addItem(newFood);
-						e.setCancelled(true);
+						item.getItemStack().setItemMeta(food.getFood().getItemMeta());
 					}
 				}
 			}
@@ -78,14 +70,14 @@ public class Events implements Listener {
 	public void onInventoryOpen(InventoryOpenEvent e) {
 
 		if (main.isPluginEnabled && main.turnItemsIntoFood) {
-
 			for (ItemStack item : e.getInventory().getContents()) {
 				if (item != null) {
 					for (Food food : FoodManager.foods) {
 						if (item.getData().equals(food.getFood().getData())) {
-
-							item.setItemMeta(food.getFood().getItemMeta());
-							e.getPlayer().sendMessage("Setting " + item.getItemMeta().getDisplayName() + " to " + food.fileName + ".");
+							if(!item.hasItemMeta()) {
+								
+								item.setItemMeta(food.getFood().getItemMeta());
+							}
 						}
 					}
 				}
