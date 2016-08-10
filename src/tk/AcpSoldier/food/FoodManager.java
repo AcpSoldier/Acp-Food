@@ -18,6 +18,7 @@ import tk.AcpSoldier.Main;
 import tk.AcpSoldier.food.foods.CannedBeans;
 import tk.AcpSoldier.food.foods.CannedFish;
 import tk.AcpSoldier.food.foods.CannedPasta;
+import tk.AcpSoldier.food.foods.MountainDew;
 import tk.AcpSoldier.food.foods.Pepsi;
 
 public class FoodManager {
@@ -32,6 +33,7 @@ public class FoodManager {
 	public static CannedPasta cannedPasta;
 	public static CannedFish cannedFish;
 	public static Pepsi pepsi;
+	public static MountainDew mountainDew;
 	
 	public static ArrayList<Food> foods = new ArrayList<Food>();
 	public static ArrayList<Player> playersThatCantEat = new ArrayList<Player>();
@@ -41,11 +43,13 @@ public class FoodManager {
 		cannedPasta = new CannedPasta(main);
 		cannedFish = new CannedFish(main);
 		pepsi = new Pepsi(main);
+		mountainDew = new MountainDew(main);
 
 		foods.add(cannedBeans);
 		foods.add(cannedPasta);
 		foods.add(cannedFish);
 		foods.add(pepsi);
+		foods.add(mountainDew);
 	}
 
 	public void eatFood(Player p, Food food, Main main) {
