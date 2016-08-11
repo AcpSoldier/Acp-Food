@@ -39,17 +39,36 @@ public class FoodManager {
 	public static ArrayList<Player> playersThatCantEat = new ArrayList<Player>();
 
 	public void setup() {
-		cannedBeans = new CannedBeans(acpFood);
-		cannedPasta = new CannedPasta(acpFood);
-		cannedFish = new CannedFish(acpFood);
-		pepsi = new Pepsi(acpFood);
-		mountainDew = new MountainDew(acpFood);
+		
+		if(foods.isEmpty()) {
+			
+			cannedBeans = new CannedBeans(acpFood);
+			cannedPasta = new CannedPasta(acpFood);
+			cannedFish = new CannedFish(acpFood);
+			pepsi = new Pepsi(acpFood);
+			mountainDew = new MountainDew(acpFood);
 
-		foods.add(cannedBeans);
-		foods.add(cannedPasta);
-		foods.add(cannedFish);
-		foods.add(pepsi);
-		foods.add(mountainDew);
+			foods.add(cannedBeans);
+			foods.add(cannedPasta);
+			foods.add(cannedFish);
+			foods.add(pepsi);
+			foods.add(mountainDew);
+		}
+		else {
+			
+			cannedBeans = new CannedBeans(acpFood);
+			cannedPasta = new CannedPasta(acpFood);
+			cannedFish = new CannedFish(acpFood);
+			pepsi = new Pepsi(acpFood);
+			mountainDew = new MountainDew(acpFood);
+			
+			foods.clear();
+			foods.add(cannedBeans);
+			foods.add(cannedPasta);
+			foods.add(cannedFish);
+			foods.add(pepsi);
+			foods.add(mountainDew);
+		}
 	}
 
 	public void eatFood(Player p, Food food, AcpFood acpFood) {

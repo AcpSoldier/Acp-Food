@@ -18,7 +18,11 @@ public class AcpFood extends JavaPlugin {
 	public boolean turnItemsIntoFood;
 
 	public FileConfiguration config;
-
+	
+	FoodManager foodManager;
+	Commands commands;
+	Events events;
+	
 	public void onEnable() {
 
 		config = this.getConfig();
@@ -26,12 +30,17 @@ public class AcpFood extends JavaPlugin {
 
 		version = this.getDescription().getVersion();
 		
-		Commands commands = new Commands(this);
-		FoodManager foodManager = new FoodManager(this);
+		commands = new Commands(this);
+		foodManager = new FoodManager(this);
+		events = new Events(this);
 
-		foodManager.setup();
 		this.getCommand("acpfood").setExecutor(commands);
-
+		Bukkit.getPluginManager().registerEvents(events, this);
+		reload();
+	}
+	
+	public void reload() {
+		
 		isPluginEnabled = config.getBoolean("Settings.Enabled");
 		maxHunger = config.getInt("Settings.MaxHunger");
 		autoRefillFood = config.getBoolean("Settings.AutoRefillFood");
@@ -39,6 +48,6 @@ public class AcpFood extends JavaPlugin {
 		eatDelay = config.getInt("Settings.EatDelay");
 		turnItemsIntoFood = config.getBoolean("Settings.TurnItemsIntoFood");
 		
-		Bukkit.getPluginManager().registerEvents(new Events(this), this);
+		foodManager.setup();
 	}
 }
