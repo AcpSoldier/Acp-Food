@@ -20,7 +20,7 @@ public class Pepsi extends Food {
 
 	public Pepsi(AcpFood acpFood) {
 
-		super("Can of Pepsi", 1, 1, "&8Right click to drink!", "", "&9Can of Pepsi", true, 3, "acpfood.foods.pepsi");
+		super("Can of Pepsi", 1, 1, "&8Right click to drink!", "", "&9Can of Pepsi", true, 3, "acpfood.foods.pepsi", 1, "", "", 0);
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
