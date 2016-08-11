@@ -47,6 +47,27 @@ public class Events implements Listener {
 					}
 				}
 			}
+			
+			if(acpFood.turnItemsIntoFood) {
+				for (ItemStack item : p.getInventory().getContents()) {
+					if (item != null) {
+						for (Food food : FoodManager.foods) {
+							if (item.getData().equals(food.getFood().getData())) {
+								if (!item.hasItemMeta()) {
+
+									item.setItemMeta(food.getFood().getItemMeta());
+								}
+								else if (item.hasItemMeta()) {
+									if (!item.getItemMeta().equals(food.getFood().getItemMeta())) {
+
+										item.setItemMeta(food.getFood().getItemMeta());
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
