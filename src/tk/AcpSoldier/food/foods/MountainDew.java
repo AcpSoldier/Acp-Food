@@ -2,6 +2,7 @@ package tk.AcpSoldier.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
+import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,8 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Dye;
-
-import net.md_5.bungee.api.ChatColor;
 import tk.AcpSoldier.AcpFood;
 import tk.AcpSoldier.food.Food;
 import tk.AcpSoldier.food.FoodManager;
@@ -27,6 +26,7 @@ public class MountainDew extends Food {
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
 		
 		if (foodFile.exists()) {
+			
 			this.displayName = foodData.getString("Settings.DisplayName");
 			this.healAmount = foodData.getInt("Settings.HealAmount");
 			this.foodAmount = foodData.getInt("Settings.FoodAmount");
@@ -36,6 +36,7 @@ public class MountainDew extends Food {
 			this.sound = foodData.getInt("Settings.Sound");
 		}
 		else {
+			
 			foodManager.updateFoodFile(this);
 		}
 	}

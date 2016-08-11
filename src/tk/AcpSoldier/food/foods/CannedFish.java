@@ -2,14 +2,13 @@ package tk.AcpSoldier.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import net.md_5.bungee.api.ChatColor;
 import tk.AcpSoldier.AcpFood;
 import tk.AcpSoldier.food.Food;
 import tk.AcpSoldier.food.FoodManager;
@@ -26,6 +25,7 @@ public class CannedFish extends Food {
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
 
 		if (foodFile.exists()) {
+
 			this.displayName = foodData.getString("Settings.DisplayName");
 			this.healAmount = foodData.getInt("Settings.HealAmount");
 			this.foodAmount = foodData.getInt("Settings.FoodAmount");
@@ -35,6 +35,7 @@ public class CannedFish extends Food {
 			this.sound = foodData.getInt("Settings.Sound");
 		}
 		else {
+			
 			foodManager.updateFoodFile(this);
 		}
 	}
@@ -43,6 +44,7 @@ public class CannedFish extends Food {
 
 	@Override
 	public void eatFood(Player p) {
+
 		foodManager.eatFood(p, FoodManager.cannedFish, acpFood);
 	}
 
