@@ -13,15 +13,15 @@ import tk.AcpSoldier.food.foods.Pepsi;
 
 public class Commands implements CommandExecutor {
 
-	Main main;
+	AcpFood acpFood;
 
-	public Commands(Main main) {
-		this.main = main;
+	public Commands(AcpFood acpFood) {
+		this.acpFood = acpFood;
 	}
 
-	CannedBeans cannedBeans = new CannedBeans(main);
-	CannedPasta cannedPasta = new CannedPasta(main);
-	Pepsi pepsi = new Pepsi(main);
+	CannedBeans cannedBeans = new CannedBeans(acpFood);
+	CannedPasta cannedPasta = new CannedPasta(acpFood);
+	Pepsi pepsi = new Pepsi(acpFood);
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String Label, String[] args) {
@@ -50,11 +50,10 @@ public class Commands implements CommandExecutor {
 				}
 			}
 			else {
-				p.sendMessage("Here are all the commands for AcpFood:");
-				p.sendMessage("/acpfood givebeans");
+				p.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "AcpFood v" + acpFood.version + " made by AcpSoldier.");
+				p.sendMessage(ChatColor.GOLD + "Need custom plugins? www.AcpSoldier.TK");
 			}
 		}
 		return true;
 	}
-
 }

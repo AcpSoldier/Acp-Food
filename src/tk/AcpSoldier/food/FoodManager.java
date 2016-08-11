@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import tk.AcpSoldier.Main;
+import tk.AcpSoldier.AcpFood;
 import tk.AcpSoldier.food.foods.CannedBeans;
 import tk.AcpSoldier.food.foods.CannedFish;
 import tk.AcpSoldier.food.foods.CannedPasta;
@@ -23,10 +23,10 @@ import tk.AcpSoldier.food.foods.Pepsi;
 
 public class FoodManager {
 
-	Main main;
+	AcpFood acpFood;
 
-	public FoodManager(Main main) {
-		this.main = main;
+	public FoodManager(AcpFood acpFood) {
+		this.acpFood = acpFood;
 	}
 
 	public static CannedBeans cannedBeans;
@@ -39,11 +39,11 @@ public class FoodManager {
 	public static ArrayList<Player> playersThatCantEat = new ArrayList<Player>();
 
 	public void setup() {
-		cannedBeans = new CannedBeans(main);
-		cannedPasta = new CannedPasta(main);
-		cannedFish = new CannedFish(main);
-		pepsi = new Pepsi(main);
-		mountainDew = new MountainDew(main);
+		cannedBeans = new CannedBeans(acpFood);
+		cannedPasta = new CannedPasta(acpFood);
+		cannedFish = new CannedFish(acpFood);
+		pepsi = new Pepsi(acpFood);
+		mountainDew = new MountainDew(acpFood);
 
 		foods.add(cannedBeans);
 		foods.add(cannedPasta);
@@ -52,7 +52,7 @@ public class FoodManager {
 		foods.add(mountainDew);
 	}
 
-	public void eatFood(Player p, Food food, Main main) {
+	public void eatFood(Player p, Food food, AcpFood acpFood) {
 
 		if (!FoodManager.playersThatCantEat.contains(p) && p.hasPermission(food.permission)) {
 
@@ -62,8 +62,8 @@ public class FoodManager {
 			else {
 				p.setHealth(p.getHealth() + food.healAmount);
 			}
-			if (p.getFoodLevel() + food.foodAmount > main.maxHunger) {
-				p.setFoodLevel(main.maxHunger);
+			if (p.getFoodLevel() + food.foodAmount > acpFood.maxHunger) {
+				p.setFoodLevel(acpFood.maxHunger);
 			}
 			else {
 				p.setFoodLevel(p.getFoodLevel() + food.foodAmount);
@@ -73,7 +73,7 @@ public class FoodManager {
 
 				p.setItemInHand(new ItemStack(Material.AIR));
 
-				if (main.config.getBoolean("Settings.AutoRefillFood")) {
+				if (acpFood.config.getBoolean("Settings.AutoRefillFood")) {
 					if (p.hasPermission("acpfood.other.refill")) {
 						
 						if (p.getInventory().contains(food.getFood().getType(), 1)) {
@@ -82,7 +82,7 @@ public class FoodManager {
 							p.getInventory().remove(newFood);
 							p.setItemInHand(newFood);
 							
-							String message = main.config.getString("Settings.AutoRefillMessage");
+							String message = acpFood.config.getString("Settings.AutoRefillMessage");
 							p.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 						}
 					}
@@ -115,11 +115,11 @@ public class FoodManager {
 			FoodManager.playersThatCantEat.add(p);
 
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-			scheduler.scheduleSyncDelayedTask(main, new Runnable() {
+			scheduler.scheduleSyncDelayedTask(acpFood, new Runnable() {
 				public void run() {
 					FoodManager.playersThatCantEat.remove(p);
 				}
-			}, main.eatDelay);
+			}, acpFood.eatDelay);
 		}
 		else if (!p.hasPermission(food.permission)) {
 			p.sendMessage(ChatColor.RED + "You don't have permission to eat " + food.fileName + ".");
@@ -149,7 +149,7 @@ public class FoodManager {
 
 	public File getFoodFile(Food food) {
 
-		File dataFolder = ((Main) Bukkit.getPluginManager().getPlugin("AcpFood")).getDataFolder();
+		File dataFolder = ((AcpFood) Bukkit.getPluginManager().getPlugin("AcpFood")).getDataFolder();
 		File playerFile = new File(dataFolder + File.separator + "Foods", food.fileName + ".yml");
 		return playerFile;
 	}

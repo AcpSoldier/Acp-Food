@@ -2,6 +2,7 @@ package tk.AcpSoldier.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
+
 import org.bukkit.DyeColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,18 +12,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Dye;
 
 import net.md_5.bungee.api.ChatColor;
-import tk.AcpSoldier.Main;
+import tk.AcpSoldier.AcpFood;
 import tk.AcpSoldier.food.Food;
 import tk.AcpSoldier.food.FoodManager;
 
 public class Pepsi extends Food {
 
-	Main main;
+	AcpFood acpFood;
 
-	public Pepsi(Main main) {
+	public Pepsi(AcpFood acpFood) {
 
 		super("Can of Pepsi", 1, 1, "&8Right click to drink!", "", "&9Can of Pepsi", true, 3, "acpfood.foods.pepsi");
-		this.main = main;
+		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
 		
@@ -40,11 +41,11 @@ public class Pepsi extends Food {
 		}
 	}
 
-	FoodManager foodManager = new FoodManager(main);
+	FoodManager foodManager = new FoodManager(acpFood);
 
 	@Override
 	public void eatFood(Player p) {
-		foodManager.eatFood(p, FoodManager.pepsi, main);
+		foodManager.eatFood(p, FoodManager.pepsi, acpFood);
 	}
 
 	@Override

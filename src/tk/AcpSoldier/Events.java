@@ -14,17 +14,17 @@ import tk.AcpSoldier.food.FoodManager;
 
 public class Events implements Listener {
 
-	Main main;
+	AcpFood acpFood;
 	FoodManager foodManager;
 
-	public Events(Main main) {
-		this.main = main;
-		foodManager = new FoodManager(main);
+	public Events(AcpFood acpFood) {
+		this.acpFood = acpFood;
+		foodManager = new FoodManager(acpFood);
 	}
 
 	@EventHandler
 	public void onPlayerEat(PlayerInteractEvent e) {
-		if (main.isPluginEnabled) {
+		if (acpFood.isPluginEnabled) {
 
 			Action a = e.getAction();
 			Player p = e.getPlayer();
@@ -51,7 +51,7 @@ public class Events implements Listener {
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
 
-		if (main.isPluginEnabled && main.turnItemsIntoFood) {
+		if (acpFood.isPluginEnabled && acpFood.turnItemsIntoFood) {
 
 			Item item = e.getItem();
 
@@ -69,7 +69,7 @@ public class Events implements Listener {
 	@EventHandler
 	public void onInventoryOpen(InventoryOpenEvent e) {
 
-		if (main.isPluginEnabled && main.turnItemsIntoFood) {
+		if (acpFood.isPluginEnabled && acpFood.turnItemsIntoFood) {
 			for (ItemStack item : e.getInventory().getContents()) {
 				if (item != null) {
 					for (Food food : FoodManager.foods) {

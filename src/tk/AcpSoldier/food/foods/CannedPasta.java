@@ -11,18 +11,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Dye;
 
 import net.md_5.bungee.api.ChatColor;
-import tk.AcpSoldier.Main;
+import tk.AcpSoldier.AcpFood;
 import tk.AcpSoldier.food.Food;
 import tk.AcpSoldier.food.FoodManager;
 
 public class CannedPasta extends Food {
 
-	Main main;
+	AcpFood acpFood;
 
-	public CannedPasta(Main main) {
+	public CannedPasta(AcpFood acpFood) {
 
 		super("Canned Pasta", 7, 7, "&8Right click to eat!", "", "&9Canned Pasta", true, 2, "acpfood.foods.cannedpasta");
-		this.main = main;
+		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
 		
@@ -40,11 +40,11 @@ public class CannedPasta extends Food {
 		}
 	}
 
-	FoodManager foodManager = new FoodManager(main);
+	FoodManager foodManager = new FoodManager(acpFood);
 
 	@Override
 	public void eatFood(Player p) {
-		foodManager.eatFood(p, FoodManager.cannedPasta, main);
+		foodManager.eatFood(p, FoodManager.cannedPasta, acpFood);
 	}
 
 	@Override
