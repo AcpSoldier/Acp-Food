@@ -18,11 +18,13 @@ public class Events implements Listener {
 	FoodManager foodManager;
 
 	public Events(AcpFood acpFood) {
+		
 		this.acpFood = acpFood;
 		foodManager = new FoodManager(acpFood);
 	}
 
 	@EventHandler
+	
 	public void onPlayerEat(PlayerInteractEvent e) {
 		if (acpFood.isPluginEnabled) {
 
@@ -33,8 +35,8 @@ public class Events implements Listener {
 				for (Food food : FoodManager.foods) {
 
 					if (p.getItemInHand().hasItemMeta()) {
-
 						if (p.getItemInHand().getItemMeta().equals(food.getFood().getItemMeta())) {
+							
 							food.eatFood(p);
 
 							// Prevents Mountain Dew from behaving like bone meal.
@@ -48,35 +50,49 @@ public class Events implements Listener {
 		}
 	}
 
+	// Turns Item entities into food.
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
-
+		
 		if (acpFood.isPluginEnabled && acpFood.turnItemsIntoFood) {
 
 			Item item = e.getItem();
 
 			for (Food food : FoodManager.foods) {
 				if (item.getItemStack().getData().equals(food.getFood().getData())) {
-					if(!item.getItemStack().hasItemMeta()) {
-						
+					if (!item.getItemStack().hasItemMeta()) {
+
 						item.getItemStack().setItemMeta(food.getFood().getItemMeta());
+					}
+					else if (item.getItemStack().hasItemMeta()) {
+						if (!item.getItemStack().getItemMeta().equals(food.getFood().getItemMeta())) {
+
+							item.getItemStack().setItemMeta(food.getFood().getItemMeta());
+						}
 					}
 				}
 			}
 		}
 	}
 
+	// Turns ItemStacks into food.
 	@EventHandler
 	public void onInventoryOpen(InventoryOpenEvent e) {
-
+		
 		if (acpFood.isPluginEnabled && acpFood.turnItemsIntoFood) {
 			for (ItemStack item : e.getInventory().getContents()) {
 				if (item != null) {
 					for (Food food : FoodManager.foods) {
 						if (item.getData().equals(food.getFood().getData())) {
-							if(!item.hasItemMeta()) {
-								
+							if (!item.hasItemMeta()) {
+
 								item.setItemMeta(food.getFood().getItemMeta());
+							}
+							else if (item.hasItemMeta()) {
+								if (!item.getItemMeta().equals(food.getFood().getItemMeta())) {
+
+									item.setItemMeta(food.getFood().getItemMeta());
+								}
 							}
 						}
 					}
