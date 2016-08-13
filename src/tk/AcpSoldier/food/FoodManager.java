@@ -77,6 +77,7 @@ public class FoodManager {
 			foods.add(mountainDew);
 			foods.add(sugar);
 		}
+		acpFood.reloadConfiguration(); //TODO: For some reason I have to run this method again for the main config to update.
 	}
 
 	public void eatFood(Player p, Food food, AcpFood acpFood) {
@@ -100,18 +101,16 @@ public class FoodManager {
 
 				p.setItemInHand(new ItemStack(Material.AIR));
 
-				if (acpFood.config.getBoolean("Settings.AutoRefillFood")) {
+				if (acpFood.autoRefillFood) {
 					if (p.hasPermission("acpfood.other.refill")) {
 
 						if (p.getInventory().contains(food.getFood().getType(), 1)) {
 
-							ItemStack newFood = p.getInventory()
-									.getItem(p.getInventory().first(food.getFood().getType()));
+							ItemStack newFood = p.getInventory().getItem(p.getInventory().first(food.getFood().getType()));
 							p.getInventory().remove(newFood);
 							p.setItemInHand(newFood);
 
-							String message = acpFood.config.getString("Settings.AutoRefillMessage");
-							p.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', acpFood.autoRefillMessage));
 						}
 					}
 				}
@@ -150,7 +149,7 @@ public class FoodManager {
 				case 1:
 					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
 					if (food.broadcastMessage.length() > 0) {
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', food.broadcastMessage));
+						Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', food.broadcastMessage));
 					}
 					break;
 				case 2:

@@ -40,14 +40,20 @@ public class AcpFood extends JavaPlugin {
 	}
 	
 	public void reload() {
+
+		reloadConfiguration();
+		this.reloadConfig();
+		config = this.getConfig();
+		foodManager.setup();
+	}
+	
+	public void reloadConfiguration() {
 		
-		isPluginEnabled = config.getBoolean("Settings.Enabled");
+		isPluginEnabled = config.getBoolean("Settings.Enabled");		
 		maxHunger = config.getInt("Settings.MaxHunger");
-		autoRefillFood = config.getBoolean("Settings.AutoRefillFood");
+		autoRefillFood = config.getBoolean("Settings.AutoRefillFood");	
 		autoRefillMessage = config.getString("Settings.AutoRefillMessage");
 		eatDelay = config.getInt("Settings.EatDelay");
 		turnItemsIntoFood = config.getBoolean("Settings.TurnItemsIntoFood");
-		
-		foodManager.setup();
 	}
 }
