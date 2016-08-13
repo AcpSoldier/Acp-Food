@@ -12,6 +12,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import tk.AcpSoldier.AcpFood;
@@ -20,6 +22,7 @@ import tk.AcpSoldier.food.foods.CannedFish;
 import tk.AcpSoldier.food.foods.CannedPasta;
 import tk.AcpSoldier.food.foods.MountainDew;
 import tk.AcpSoldier.food.foods.Pepsi;
+import tk.AcpSoldier.food.foods.Sugar;
 
 public class FoodManager {
 
@@ -34,6 +37,7 @@ public class FoodManager {
 	public static CannedFish cannedFish;
 	public static Pepsi pepsi;
 	public static MountainDew mountainDew;
+	public static Sugar sugar;
 
 	public static ArrayList<Food> foods = new ArrayList<Food>();
 	public static ArrayList<Player> playersThatCantEat = new ArrayList<Player>();
@@ -47,12 +51,14 @@ public class FoodManager {
 			cannedFish = new CannedFish(acpFood);
 			pepsi = new Pepsi(acpFood);
 			mountainDew = new MountainDew(acpFood);
+			sugar = new Sugar(acpFood);
 
 			foods.add(cannedBeans);
 			foods.add(cannedPasta);
 			foods.add(cannedFish);
 			foods.add(pepsi);
 			foods.add(mountainDew);
+			foods.add(sugar);
 		}
 		else {
 
@@ -61,6 +67,7 @@ public class FoodManager {
 			cannedFish = new CannedFish(acpFood);
 			pepsi = new Pepsi(acpFood);
 			mountainDew = new MountainDew(acpFood);
+			sugar = new Sugar(acpFood);
 
 			foods.clear();
 			foods.add(cannedBeans);
@@ -68,6 +75,7 @@ public class FoodManager {
 			foods.add(cannedFish);
 			foods.add(pepsi);
 			foods.add(mountainDew);
+			foods.add(sugar);
 		}
 	}
 
@@ -118,20 +126,41 @@ public class FoodManager {
 
 			if (food.playSound) {
 				switch (food.sound) {
-				case 1:
-					p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
-					break;
-				case 2:
-					p.playSound(p.getLocation(), Sound.EAT, 1.0f, 1.0f);
-					break;
-				case 3:
-					p.playSound(p.getLocation(), Sound.DRINK, 1.0f, 1.0f);
-					break;
-				default:
-					p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
-					break;
+					case 1:
+						p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
+						break;
+					case 2:
+						p.playSound(p.getLocation(), Sound.EAT, 1.0f, 1.0f);
+						break;
+					case 3:
+						p.playSound(p.getLocation(), Sound.DRINK, 1.0f, 1.0f);
+						break;
+					case 4:
+						p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 0.5f, 1.5f);
+						break;
+					default:
+						p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
+						break;
 				}
 			}
+
+			switch (food.effect) {
+				default:
+					break;
+				case 1:
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
+					if (food.broadcastMessage.length() > 0) {
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', food.broadcastMessage));
+					}
+					break;
+				case 2:
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
+					if (food.broadcastMessage.length() > 0) {
+						Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', food.broadcastMessage));
+					}
+					break;
+			}
+
 			FoodManager.playersThatCantEat.add(p);
 
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
@@ -153,55 +182,57 @@ public class FoodManager {
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
 
 		switch (food.category) {
+			case 1:
+				try {
+					foodData.set("Settings.DisplayName", food.displayName);
+					foodData.set("Settings.HealAmount", food.healAmount);
+					foodData.set("Settings.FoodAmount", food.foodAmount);
+					foodData.set("Settings.ItemLore", food.itemLore);
+					foodData.set("Settings.EatMessage", food.eatMessage);
+					foodData.set("Settings.PlaySound", food.playSound);
+					foodData.set("Settings.Sound", food.sound);
+					foodData.save(foodFile);
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			case 2:
+				try {
+					foodData.set("Settings.DisplayName", food.displayName);
+					foodData.set("Settings.HealAmount", food.healAmount);
+					foodData.set("Settings.FoodAmount", food.foodAmount);
+					foodData.set("Settings.ItemLore", food.itemLore);
+					foodData.set("Settings.EatMessage", food.eatMessage);
+					foodData.set("Settings.PlaySound", food.playSound);
+					foodData.set("Settings.Sound", food.sound);
 
-		case 1:
-			try {
-				foodData.set("Settings.DisplayName", food.displayName);
-				foodData.set("Settings.HealAmount", food.healAmount);
-				foodData.set("Settings.FoodAmount", food.foodAmount);
-				foodData.set("Settings.ItemLore", food.itemLore);
-				foodData.set("Settings.EatMessage", food.eatMessage);
-				foodData.set("Settings.PlaySound", food.playSound);
-				foodData.set("Settings.Sound", food.sound);
-				foodData.save(foodFile);
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-		case 2:
-			try {
-				foodData.set("Settings.DisplayName", food.displayName);
-				foodData.set("Settings.HealAmount", food.healAmount);
-				foodData.set("Settings.FoodAmount", food.foodAmount);
-				foodData.set("Settings.ItemLore", food.itemLore);
-				foodData.set("Settings.EatMessage", food.eatMessage);
-				foodData.set("Settings.PlaySound", food.playSound);
-				foodData.set("Settings.Sound", food.sound);
-				
-				foodData.set("Settings.BroadcastMessage", food.broadcastMessage);
-				foodData.set("Settings.Effect", food.effect);
-				foodData.save(foodFile);
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+					foodData.set("Settings.BroadcastMessage", food.broadcastMessage);
+					foodData.set("Settings.Effect", food.effect);
+					foodData.save(foodFile);
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
 
-		case 3:
-			try {
-				foodData.set("Settings.DisplayName", food.displayName);
-				foodData.set("Settings.HealAmount", food.healAmount);
-				foodData.set("Settings.FoodAmount", food.foodAmount);
-				foodData.set("Settings.ItemLore", food.itemLore);
-				foodData.set("Settings.EatMessage", food.eatMessage);
-				foodData.set("Settings.PlaySound", food.playSound);
-				foodData.set("Settings.Sound", food.sound);
-				
-				foodData.set("Settings.ItemId", food.itemId);
-				foodData.save(foodFile);
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+			case 3:
+				try {
+					foodData.set("Settings.DisplayName", food.displayName);
+					foodData.set("Settings.HealAmount", food.healAmount);
+					foodData.set("Settings.FoodAmount", food.foodAmount);
+					foodData.set("Settings.ItemLore", food.itemLore);
+					foodData.set("Settings.EatMessage", food.eatMessage);
+					foodData.set("Settings.PlaySound", food.playSound);
+					foodData.set("Settings.Sound", food.sound);
+
+					foodData.set("Settings.ItemId", food.itemId);
+					foodData.save(foodFile);
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
 		}
 	}
 
