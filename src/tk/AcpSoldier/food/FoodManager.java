@@ -41,6 +41,7 @@ public class FoodManager {
 
 	public static ArrayList<Food> foods = new ArrayList<Food>();
 	public static ArrayList<Player> playersThatCantEat = new ArrayList<Player>();
+	public static ArrayList<Player> appleEaters = new ArrayList<Player>();
 
 	public void setup() {
 
@@ -136,6 +137,9 @@ public class FoodManager {
 						break;
 					case 4:
 						p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 0.5f, 1.5f);
+						break;
+					case 5:
+						p.playSound(p.getLocation(), Sound.WITHER_SPAWN, 0.5f, 1.5f);
 						break;
 					default:
 						p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
