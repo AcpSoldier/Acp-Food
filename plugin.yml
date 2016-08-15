@@ -13,5 +13,11 @@ permissions:
     description: Players with this permission can eat Canned Beans.
   acpfood.foods.cannedpasta:
     description: Players with this permission can eat Canned Pasta.
+  acpfood.foods.cannedfish:
+    description: Players with this permission can eat Canned Fish.
+  acpfood.foods.mountaindew:
+    description: Players with this permission can drink Mountain Dew.
   acpfood.foods.pepsi:
     description: Players with this permission can drink Pepsi.
+  acpfood.foods.sugar:
+    description: Players with this permission can eat Sugar.
