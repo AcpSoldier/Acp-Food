@@ -1,29 +1,31 @@
-package tk.AcpSoldier.food.foods;
+package com.acpsoldier.acpfood.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.DyeColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import tk.AcpSoldier.AcpFood;
-import tk.AcpSoldier.food.Food;
-import tk.AcpSoldier.food.FoodManager;
+import org.bukkit.material.Dye;
 
-public class Sugar extends Food {
+import com.acpsoldier.acpfood.AcpFood;
+import com.acpsoldier.acpfood.food.Food;
+import com.acpsoldier.acpfood.food.FoodManager;
+
+public class CannedBeans extends Food {
 
 	AcpFood acpFood;
 
-	public Sugar(AcpFood acpFood) {
+	public CannedBeans(AcpFood acpFood) {
 
-		super("Sugar", 0, 0, "&8Right click to eat!", "", "&9Speed Sugar", true, 4, "acpfood.foods.sugar", 2, "", "", 1);
+		super("Canned Beans", 5, 5, "&8Right click to eat!", "", "&9Canned Beans", true, 2, "acpfood.foods.cannedbeans", 1, "", "", 0);
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
-		
+
 		if (foodFile.exists()) {
 			
 			this.displayName = foodData.getString("Settings.DisplayName");
@@ -33,9 +35,6 @@ public class Sugar extends Food {
 			this.eatMessage = foodData.getString("Settings.EatMessage");
 			this.playSound = foodData.getBoolean("Settings.PlaySound");
 			this.sound = foodData.getInt("Settings.Sound");
-			
-			this.effect = foodData.getInt("Settings.Effect");
-			this.broadcastMessage = foodData.getString("Settings.BroadcastMessage");
 		}
 		else {
 			
@@ -48,13 +47,16 @@ public class Sugar extends Food {
 	@Override
 	public void eatFood(Player p) {
 		
-		foodManager.eatFood(p, FoodManager.sugar, acpFood);
+		foodManager.eatFood(p, FoodManager.cannedBeans, acpFood);
 	}
 
 	@Override
 	public ItemStack getFood() {
 
-		ItemStack is = new ItemStack(Material.SUGAR);
+		Dye blue = new Dye();
+		blue.setColor(DyeColor.BLUE);
+
+		ItemStack is = blue.toItemStack();
 		ItemMeta im = is.getItemMeta();
 		ArrayList<String> lore = new ArrayList<String>();
 

@@ -1,4 +1,4 @@
-package tk.AcpSoldier;
+package com.acpsoldier.acpfood;
 
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -9,8 +9,9 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
-import tk.AcpSoldier.food.Food;
-import tk.AcpSoldier.food.FoodManager;
+
+import com.acpsoldier.acpfood.food.Food;
+import com.acpsoldier.acpfood.food.FoodManager;
 
 public class Events implements Listener {
 

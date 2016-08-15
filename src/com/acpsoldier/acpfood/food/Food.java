@@ -1,4 +1,4 @@
-package tk.AcpSoldier.food;
+package com.acpsoldier.acpfood.food;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

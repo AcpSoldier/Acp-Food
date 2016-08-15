@@ -1,4 +1,4 @@
-package tk.AcpSoldier;
+package com.acpsoldier.acpfood;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

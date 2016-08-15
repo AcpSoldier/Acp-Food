@@ -1,32 +1,32 @@
-package tk.AcpSoldier.food.foods;
+package com.acpsoldier.acpfood.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
 import org.bukkit.ChatColor;
-import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.Dye;
-import tk.AcpSoldier.AcpFood;
-import tk.AcpSoldier.food.Food;
-import tk.AcpSoldier.food.FoodManager;
 
-public class Pepsi extends Food {
+import com.acpsoldier.acpfood.AcpFood;
+import com.acpsoldier.acpfood.food.Food;
+import com.acpsoldier.acpfood.food.FoodManager;
+
+public class CannedFish extends Food {
 
 	AcpFood acpFood;
 
-	public Pepsi(AcpFood acpFood) {
+	public CannedFish(AcpFood acpFood) {
 
-		super("Can of Pepsi", 1, 1, "&8Right click to drink!", "", "&9Can of Pepsi", true, 3, "acpfood.foods.pepsi", 1, "", "", 0);
+		super("Canned Fish", 7, 7, "&8Right click to eat!", "", "&9Canned Fish", true, 2, "acpfood.foods.cannedfish", 1, "", "", 0);
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
-		
+
 		if (foodFile.exists()) {
-			
+
 			this.displayName = foodData.getString("Settings.DisplayName");
 			this.healAmount = foodData.getInt("Settings.HealAmount");
 			this.foodAmount = foodData.getInt("Settings.FoodAmount");
@@ -45,17 +45,14 @@ public class Pepsi extends Food {
 
 	@Override
 	public void eatFood(Player p) {
-		
-		foodManager.eatFood(p, FoodManager.pepsi, acpFood);
+
+		foodManager.eatFood(p, FoodManager.cannedFish, acpFood);
 	}
 
 	@Override
 	public ItemStack getFood() {
 
-		Dye orange = new Dye();
-		orange.setColor(DyeColor.ORANGE);
-
-		ItemStack is = orange.toItemStack();
+		ItemStack is = new ItemStack(Material.COOKED_FISH);
 		ItemMeta im = is.getItemMeta();
 		ArrayList<String> lore = new ArrayList<String>();
 

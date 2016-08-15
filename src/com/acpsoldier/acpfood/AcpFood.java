@@ -1,10 +1,10 @@
-package tk.AcpSoldier;
+package com.acpsoldier.acpfood;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import tk.AcpSoldier.food.FoodManager;
+import com.acpsoldier.acpfood.food.FoodManager;
 
 public class AcpFood extends JavaPlugin {
 	

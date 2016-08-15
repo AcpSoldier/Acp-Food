@@ -1,4 +1,4 @@
-package tk.AcpSoldier.food;
+package com.acpsoldier.acpfood.food;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,13 +16,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import tk.AcpSoldier.AcpFood;
-import tk.AcpSoldier.food.foods.CannedBeans;
-import tk.AcpSoldier.food.foods.CannedFish;
-import tk.AcpSoldier.food.foods.CannedPasta;
-import tk.AcpSoldier.food.foods.MountainDew;
-import tk.AcpSoldier.food.foods.Pepsi;
-import tk.AcpSoldier.food.foods.Sugar;
+import com.acpsoldier.acpfood.AcpFood;
+import com.acpsoldier.acpfood.food.foods.CannedBeans;
+import com.acpsoldier.acpfood.food.foods.CannedFish;
+import com.acpsoldier.acpfood.food.foods.CannedPasta;
+import com.acpsoldier.acpfood.food.foods.MountainDew;
+import com.acpsoldier.acpfood.food.foods.Pepsi;
+import com.acpsoldier.acpfood.food.foods.Sugar;
 
 public class FoodManager {
 

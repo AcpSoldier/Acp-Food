@@ -1,4 +1,4 @@
-package tk.AcpSoldier.food.foods;
+package com.acpsoldier.acpfood.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,9 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Dye;
-import tk.AcpSoldier.AcpFood;
-import tk.AcpSoldier.food.Food;
-import tk.AcpSoldier.food.FoodManager;
+
+import com.acpsoldier.acpfood.AcpFood;
+import com.acpsoldier.acpfood.food.Food;
+import com.acpsoldier.acpfood.food.FoodManager;
 
 public class MountainDew extends Food {
 

@@ -1,4 +1,4 @@
-package tk.AcpSoldier.food.foods;
+package com.acpsoldier.acpfood.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,23 +9,24 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import tk.AcpSoldier.AcpFood;
-import tk.AcpSoldier.food.Food;
-import tk.AcpSoldier.food.FoodManager;
 
-public class CannedFish extends Food {
+import com.acpsoldier.acpfood.AcpFood;
+import com.acpsoldier.acpfood.food.Food;
+import com.acpsoldier.acpfood.food.FoodManager;
+
+public class Sugar extends Food {
 
 	AcpFood acpFood;
 
-	public CannedFish(AcpFood acpFood) {
+	public Sugar(AcpFood acpFood) {
 
-		super("Canned Fish", 7, 7, "&8Right click to eat!", "", "&9Canned Fish", true, 2, "acpfood.foods.cannedfish", 1, "", "", 0);
+		super("Sugar", 0, 0, "&8Right click to eat!", "", "&9Speed Sugar", true, 4, "acpfood.foods.sugar", 2, "", "", 1);
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
-
+		
 		if (foodFile.exists()) {
-
+			
 			this.displayName = foodData.getString("Settings.DisplayName");
 			this.healAmount = foodData.getInt("Settings.HealAmount");
 			this.foodAmount = foodData.getInt("Settings.FoodAmount");
@@ -33,6 +34,9 @@ public class CannedFish extends Food {
 			this.eatMessage = foodData.getString("Settings.EatMessage");
 			this.playSound = foodData.getBoolean("Settings.PlaySound");
 			this.sound = foodData.getInt("Settings.Sound");
+			
+			this.effect = foodData.getInt("Settings.Effect");
+			this.broadcastMessage = foodData.getString("Settings.BroadcastMessage");
 		}
 		else {
 			
@@ -44,14 +48,14 @@ public class CannedFish extends Food {
 
 	@Override
 	public void eatFood(Player p) {
-
-		foodManager.eatFood(p, FoodManager.cannedFish, acpFood);
+		
+		foodManager.eatFood(p, FoodManager.sugar, acpFood);
 	}
 
 	@Override
 	public ItemStack getFood() {
 
-		ItemStack is = new ItemStack(Material.COOKED_FISH);
+		ItemStack is = new ItemStack(Material.SUGAR);
 		ItemMeta im = is.getItemMeta();
 		ArrayList<String> lore = new ArrayList<String>();
 

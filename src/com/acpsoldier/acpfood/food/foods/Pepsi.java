@@ -1,4 +1,4 @@
-package tk.AcpSoldier.food.foods;
+package com.acpsoldier.acpfood.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,21 +10,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Dye;
-import tk.AcpSoldier.AcpFood;
-import tk.AcpSoldier.food.Food;
-import tk.AcpSoldier.food.FoodManager;
 
-public class CannedBeans extends Food {
+import com.acpsoldier.acpfood.AcpFood;
+import com.acpsoldier.acpfood.food.Food;
+import com.acpsoldier.acpfood.food.FoodManager;
+
+public class Pepsi extends Food {
 
 	AcpFood acpFood;
 
-	public CannedBeans(AcpFood acpFood) {
+	public Pepsi(AcpFood acpFood) {
 
-		super("Canned Beans", 5, 5, "&8Right click to eat!", "", "&9Canned Beans", true, 2, "acpfood.foods.cannedbeans", 1, "", "", 0);
+		super("Can of Pepsi", 1, 1, "&8Right click to drink!", "", "&9Can of Pepsi", true, 3, "acpfood.foods.pepsi", 1, "", "", 0);
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
-
+		
 		if (foodFile.exists()) {
 			
 			this.displayName = foodData.getString("Settings.DisplayName");
@@ -46,16 +47,16 @@ public class CannedBeans extends Food {
 	@Override
 	public void eatFood(Player p) {
 		
-		foodManager.eatFood(p, FoodManager.cannedBeans, acpFood);
+		foodManager.eatFood(p, FoodManager.pepsi, acpFood);
 	}
 
 	@Override
 	public ItemStack getFood() {
 
-		Dye blue = new Dye();
-		blue.setColor(DyeColor.BLUE);
+		Dye orange = new Dye();
+		orange.setColor(DyeColor.ORANGE);
 
-		ItemStack is = blue.toItemStack();
+		ItemStack is = orange.toItemStack();
 		ItemMeta im = is.getItemMeta();
 		ArrayList<String> lore = new ArrayList<String>();
 
