@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -125,25 +126,52 @@ public class FoodManager {
 			}
 
 			if (food.playSound) {
-				switch (food.sound) {
-					case 1:
-						p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
-						break;
-					case 2:
-						p.playSound(p.getLocation(), Sound.EAT, 1.0f, 1.0f);
-						break;
-					case 3:
-						p.playSound(p.getLocation(), Sound.DRINK, 1.0f, 1.0f);
-						break;
-					case 4:
-						p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 0.5f, 1.5f);
-						break;
-					case 5:
-						p.playSound(p.getLocation(), Sound.WITHER_SPAWN, 0.5f, 1.5f);
-						break;
-					default:
-						p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
-						break;
+				if(acpFood.broadcastFoodSounds) {
+					
+					World w = p.getWorld();
+					
+					switch (food.sound) {
+						case 1:
+							w.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
+							break;
+						case 2:
+							w.playSound(p.getLocation(), Sound.EAT, 1.0f, 1.0f);
+							break;
+						case 3:
+							w.playSound(p.getLocation(), Sound.DRINK, 1.0f, 1.0f);
+							break;
+						case 4:
+							w.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 0.5f, 1.5f);
+							break;
+						case 5:
+							w.playSound(p.getLocation(), Sound.WITHER_SPAWN, 0.5f, 1.5f);
+							break;
+						default:
+							w.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
+							break;
+					}
+				}
+				else {
+					switch (food.sound) {
+						case 1:
+							p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
+							break;
+						case 2:
+							p.playSound(p.getLocation(), Sound.EAT, 1.0f, 1.0f);
+							break;
+						case 3:
+							p.playSound(p.getLocation(), Sound.DRINK, 1.0f, 1.0f);
+							break;
+						case 4:
+							p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 0.5f, 1.5f);
+							break;
+						case 5:
+							p.playSound(p.getLocation(), Sound.WITHER_SPAWN, 0.5f, 1.5f);
+							break;
+						default:
+							p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
+							break;
+					}
 				}
 			}
 

@@ -30,3 +30,6 @@ Settings:
 
 # Attempts to turn all food items into actual food. (Example: Turns all Lapis Lazuli into Canned Beans automatically.)
   TurnItemsIntoFood: true
+
+# Allows other players on the server to hear when players eat/drink.
+  BroadcastFoodSounds: true

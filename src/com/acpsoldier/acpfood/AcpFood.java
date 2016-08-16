@@ -16,7 +16,8 @@ public class AcpFood extends JavaPlugin {
 	public String autoRefillMessage;
 	public int eatDelay;
 	public boolean turnItemsIntoFood;
-
+	public boolean broadcastFoodSounds;
+	
 	public FileConfiguration config;
 	
 	FoodManager foodManager;
@@ -55,5 +56,6 @@ public class AcpFood extends JavaPlugin {
 		autoRefillMessage = config.getString("Settings.AutoRefillMessage");
 		eatDelay = config.getInt("Settings.EatDelay");
 		turnItemsIntoFood = config.getBoolean("Settings.TurnItemsIntoFood");
+		broadcastFoodSounds = config.getBoolean("Settings.BroadcastFoodSounds");
 	}
 }
