@@ -14,14 +14,8 @@ public abstract class Food {
 	public boolean playSound;
 	public int sound;
 	public String permission;
-	public int category;
-
-	//Only special foods use these.
-	public String broadcastMessage;
-	public String itemId;
-	public int effect;
 	
-	public Food(String fileName, int healAmount, int foodAmount, String itemLore, String eatMessage, String displayName, boolean playSound, int sound, String permission, int category, String broadcastMessage, String itemId, int effect) {
+	public Food(String fileName, int healAmount, int foodAmount, String itemLore, String eatMessage, String displayName, boolean playSound, int sound, String permission) {
 
 		this.fileName = fileName;
 		this.healAmount = healAmount;
@@ -32,12 +26,6 @@ public abstract class Food {
 		this.playSound = playSound;
 		this.sound = sound;
 		this.permission = permission;
-		this.category = category;
-		
-		//Only special foods use these.
-		this.broadcastMessage = broadcastMessage;
-		this.itemId = itemId;
-		this.effect = effect;
 	}
 
 	public abstract void eatFood(Player p);

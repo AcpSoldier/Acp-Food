@@ -21,7 +21,7 @@ public class CannedBeans extends Food {
 
 	public CannedBeans(AcpFood acpFood) {
 
-		super("Canned Beans", 5, 5, "&8Right click to eat!", "", "&9Canned Beans", true, 2, "acpfood.foods.cannedbeans", 1, "", "", 0);
+		super("Canned Beans", 5, 5, "&8Right click to eat!", "", "&9Canned Beans", true, 2, "acpfood.foods.cannedbeans");
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);

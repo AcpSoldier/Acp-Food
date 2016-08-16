@@ -21,7 +21,7 @@ public class MountainDew extends Food {
 
 	public MountainDew(AcpFood acpFood) {
 
-		super("Mountain Dew", 20, 20, "&8Right click to drink!", "", "&aMountain Dew", true, 3, "acpfood.foods.mountaindew", 1, "", "", 0);
+		super("Mountain Dew", 20, 20, "&8Right click to drink!", "", "&aMountain Dew", true, 3, "acpfood.foods.mountaindew");
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);

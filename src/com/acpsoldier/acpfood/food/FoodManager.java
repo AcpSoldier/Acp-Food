@@ -43,6 +43,7 @@ public class FoodManager {
 	public static ArrayList<Food> foods = new ArrayList<Food>();
 	public static ArrayList<Player> playersThatCantEat = new ArrayList<Player>();
 	public static ArrayList<Player> appleEaters = new ArrayList<Player>();
+	public static ArrayList<Player> sugarEaters = new ArrayList<Player>();
 
 	public void setup() {
 
@@ -79,7 +80,9 @@ public class FoodManager {
 			foods.add(mountainDew);
 			foods.add(sugar);
 		}
-		acpFood.reloadConfiguration(); //TODO: For some reason I have to run this method again for the main config to update.
+		acpFood.reloadConfiguration(); // TODO: For some reason I have to run
+										// this method again for the main config
+										// to update.
 	}
 
 	public void eatFood(Player p, Food food, AcpFood acpFood) {
@@ -108,7 +111,8 @@ public class FoodManager {
 
 						if (p.getInventory().contains(food.getFood().getType(), 1)) {
 
-							ItemStack newFood = p.getInventory().getItem(p.getInventory().first(food.getFood().getType()));
+							ItemStack newFood = p.getInventory()
+									.getItem(p.getInventory().first(food.getFood().getType()));
 							p.getInventory().remove(newFood);
 							p.setItemInHand(newFood);
 
@@ -126,10 +130,10 @@ public class FoodManager {
 			}
 
 			if (food.playSound) {
-				if(acpFood.broadcastFoodSounds) {
-					
+				if (acpFood.broadcastFoodSounds) {
+
 					World w = p.getWorld();
-					
+
 					switch (food.sound) {
 						case 1:
 							w.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
@@ -175,21 +179,11 @@ public class FoodManager {
 				}
 			}
 
-			switch (food.effect) {
+			// Special foods get special features! :) It pays to be special.
+			switch (food.fileName) {
 				default:
 					break;
-				case 1:
-					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
-					if (food.broadcastMessage.length() > 0) {
-						Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', food.broadcastMessage));
-					}
-					break;
-				case 2:
-					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
-					if (food.broadcastMessage.length() > 0) {
-						Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', food.broadcastMessage));
-					}
-					break;
+				case "Sugar":
 			}
 
 			FoodManager.playersThatCantEat.add(p);
@@ -204,7 +198,6 @@ public class FoodManager {
 		else if (!p.hasPermission(food.permission)) {
 			p.sendMessage(ChatColor.RED + "You don't have permission to eat " + food.fileName + ".");
 		}
-
 	}
 
 	public void updateFoodFile(Food food) {
@@ -212,59 +205,33 @@ public class FoodManager {
 		File foodFile = getFoodFile(food);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
 
-		switch (food.category) {
-			case 1:
-				try {
-					foodData.set("Settings.DisplayName", food.displayName);
-					foodData.set("Settings.HealAmount", food.healAmount);
-					foodData.set("Settings.FoodAmount", food.foodAmount);
-					foodData.set("Settings.ItemLore", food.itemLore);
-					foodData.set("Settings.EatMessage", food.eatMessage);
-					foodData.set("Settings.PlaySound", food.playSound);
-					foodData.set("Settings.Sound", food.sound);
-					foodData.save(foodFile);
-				}
-				catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			case 2:
-				try {
-					foodData.set("Settings.DisplayName", food.displayName);
-					foodData.set("Settings.HealAmount", food.healAmount);
-					foodData.set("Settings.FoodAmount", food.foodAmount);
-					foodData.set("Settings.ItemLore", food.itemLore);
-					foodData.set("Settings.EatMessage", food.eatMessage);
-					foodData.set("Settings.PlaySound", food.playSound);
-					foodData.set("Settings.Sound", food.sound);
+		foodData.set("Settings.DisplayName", food.displayName);
+		foodData.set("Settings.HealAmount", food.healAmount);
+		foodData.set("Settings.FoodAmount", food.foodAmount);
+		foodData.set("Settings.ItemLore", food.itemLore);
+		foodData.set("Settings.EatMessage", food.eatMessage);
+		foodData.set("Settings.PlaySound", food.playSound);
+		foodData.set("Settings.Sound", food.sound);
 
-					foodData.set("Settings.BroadcastMessage", food.broadcastMessage);
-					foodData.set("Settings.Effect", food.effect);
-					foodData.save(foodFile);
-				}
-				catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
+		// Special foods get special settings :) Don't you wish you were a
+		// special food?
+		switch (food.fileName) {
+			case "Sugar":
 
-			case 3:
-				try {
-					foodData.set("Settings.DisplayName", food.displayName);
-					foodData.set("Settings.HealAmount", food.healAmount);
-					foodData.set("Settings.FoodAmount", food.foodAmount);
-					foodData.set("Settings.ItemLore", food.itemLore);
-					foodData.set("Settings.EatMessage", food.eatMessage);
-					foodData.set("Settings.PlaySound", food.playSound);
-					foodData.set("Settings.Sound", food.sound);
-
-					foodData.set("Settings.ItemId", food.itemId);
-					foodData.save(foodFile);
-				}
-				catch (IOException e) {
-					e.printStackTrace();
-				}
+				foodData.set("Settings.SpeedTime", Sugar.speedTime);
+				foodData.set("Settings.SpeedLevel", Sugar.speedLevel);
 				break;
 		}
+
+		try {
+			foodData.save(foodFile);
+		}
+		catch (IOException e) {
+			acpFood.getLogger().severe("Failed to edit the '" + food.fileName
+					+ "' file. This should never happen. If it does happen, I'm pretty sure it's not my fault! :(");
+			e.printStackTrace();
+		}
+
 	}
 
 	public File getFoodFile(Food food) {

@@ -2,6 +2,8 @@ package com.acpsoldier.acpfood.food.foods;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import com.acpsoldier.acpfood.AcpFood;
 import com.acpsoldier.acpfood.food.Food;
@@ -17,10 +20,15 @@ import com.acpsoldier.acpfood.food.FoodManager;
 public class Sugar extends Food {
 
 	AcpFood acpFood;
+	
+	//The default speed time when the plugin is first installed.
+	public static int speedTime = 20;
+	//The default speed level when the plugin is first installed.
+	public static int speedLevel = 0;
 
 	public Sugar(AcpFood acpFood) {
 
-		super("Sugar", 0, 0, "&8Right click to eat!", "", "&9Speed Sugar", true, 4, "acpfood.foods.sugar", 2, "", "", 1);
+		super("Sugar", 0, 0, "&8Right click to eat!", "", "&9Speed Sugar", true, 4, "acpfood.foods.sugar");
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
@@ -35,8 +43,8 @@ public class Sugar extends Food {
 			this.playSound = foodData.getBoolean("Settings.PlaySound");
 			this.sound = foodData.getInt("Settings.Sound");
 			
-			this.effect = foodData.getInt("Settings.Effect");
-			this.broadcastMessage = foodData.getString("Settings.BroadcastMessage");
+			Sugar.speedTime = foodData.getInt("Settings.SpeedTime");
+			Sugar.speedLevel = foodData.getInt("Settings.SpeedLevel");
 		}
 		else {
 			
@@ -49,7 +57,18 @@ public class Sugar extends Food {
 	@Override
 	public void eatFood(Player p) {
 		
-		foodManager.eatFood(p, FoodManager.sugar, acpFood);
+		if(!FoodManager.sugarEaters.contains(p)) {
+			foodManager.eatFood(p, FoodManager.sugar, acpFood);
+			
+			FoodManager.sugarEaters.add(p);
+			
+			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+			scheduler.scheduleSyncDelayedTask(acpFood, new Runnable() {
+				public void run() {
+					FoodManager.sugarEaters.remove(p);
+				}
+			}, speedTime);
+		}
 	}
 
 	@Override
