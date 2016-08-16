@@ -184,6 +184,7 @@ public class FoodManager {
 				default:
 					break;
 				case "Sugar":
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Sugar.speedTime, Sugar.speedLevel));
 			}
 
 			FoodManager.playersThatCantEat.add(p);
