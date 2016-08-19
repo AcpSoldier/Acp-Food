@@ -1,5 +1,5 @@
-name: AcpFood
-version: 2.1.0
+name: ${project.artifactId}
+version: ${project.version}
 main: com.acpsoldier.acpfood.AcpFood
 commands:
   acpfood:
