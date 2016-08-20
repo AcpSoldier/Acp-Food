@@ -191,8 +191,10 @@ public class FoodManager {
 					break;
 				case "Sugar":
 					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Sugar.speedTime, Sugar.speedLevel));
+					break;
 				case "Golden Apple":
 					p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, GoldenApple.invincibilityTime, 0));
+					break;
 			}
 
 			FoodManager.playersThatCantEat.add(p);

@@ -65,6 +65,7 @@ public class GoldenApple extends Food {
 					FoodManager.appleEaters.remove(p);
 				}
 			}, invincibilityTime);
+			p.setItemInHand(p.getItemInHand()); //This should fix the actual eating of the golden apple. I don't think people want apple eaters to get absorption.
 		}
 	}
 
