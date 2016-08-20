@@ -26,9 +26,15 @@ public class Commands implements CommandExecutor {
 					if (sender instanceof Player) {
 
 						Player p = (Player) sender;
-						p.sendMessage(ChatColor.GOLD + "Reloading Acp Food settings...");
-						acpFood.reload();
-						p.sendMessage(ChatColor.GOLD + "Acp Food settings have been updated!");
+						
+						if(p.hasPermission("acpfood.reload") || p.isOp()) {
+							p.sendMessage(ChatColor.GOLD + "Reloading Acp Food settings...");
+							acpFood.reload();
+							p.sendMessage(ChatColor.GOLD + "Acp Food settings have been updated!");	
+						}
+						else {
+							p.sendMessage(ChatColor.RED + "You don't have permission.");	
+						}
 					}
 					else {
 
@@ -42,7 +48,12 @@ public class Commands implements CommandExecutor {
 					if (sender instanceof Player) {
 
 						Player p = (Player) sender;
-						p.sendMessage(ChatColor.GOLD + "Please enter this command from the console. :)");
+						if(p.hasPermission("acpfood.reload") || p.isOp()) {
+							p.sendMessage(ChatColor.GOLD + "Please enter this command from the console. :)");
+						}
+						else {
+							p.sendMessage(ChatColor.RED + "You don't have permission.");	
+						}
 					}
 					else {
 

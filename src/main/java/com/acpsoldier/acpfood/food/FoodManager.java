@@ -113,7 +113,7 @@ public class FoodManager {
 				p.setItemInHand(new ItemStack(Material.AIR));
 
 				if (acpFood.autoRefillFood) {
-					if (p.hasPermission("acpfood.other.refill")) {
+					if (p.hasPermission("acpfood.refill")) {
 
 						if (p.getInventory().contains(food.getFood().getType(), 1)) {
 
