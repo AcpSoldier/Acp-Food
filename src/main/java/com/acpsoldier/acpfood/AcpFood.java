@@ -31,7 +31,7 @@ public class AcpFood extends JavaPlugin {
 		this.saveDefaultConfig();
 
 		version = this.getDescription().getVersion();
-
+		
 		commands = new Commands(this);
 		foodManager = new FoodManager(this);
 		events = new Events(this);
@@ -72,5 +72,10 @@ public class AcpFood extends JavaPlugin {
 		turnItemsIntoFood = config.getBoolean("Settings.TurnItemsIntoFood");
 		broadcastFoodSounds = config.getBoolean("Settings.BroadcastFoodSounds");
 		autoUpdate = config.getBoolean("Settings.AutoUpdate");
+	}
+
+	public void update() {
+		@SuppressWarnings("unused")
+		Updater updater = new Updater(this, 87415, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
 	}
 }

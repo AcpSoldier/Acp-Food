@@ -37,6 +37,20 @@ public class Commands implements CommandExecutor {
 						acpFood.getLogger().info("Acp Food settings have been updated!");
 					}
 				}
+				else if (args[0].equalsIgnoreCase("update")) {
+
+					if (sender instanceof Player) {
+
+						Player p = (Player) sender;
+						p.sendMessage(ChatColor.GOLD + "Please enter this command from the console. :)");
+					}
+					else {
+
+						acpFood.getLogger().info("Downloading latest version of Acp Food!");
+						acpFood.update();
+						acpFood.getLogger().info("Remember to restart your server after an update.");
+					}
+				}
 				else {
 					if (sender instanceof Player) {
 
