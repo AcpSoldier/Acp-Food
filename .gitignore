@@ -1,0 +1,7 @@
+.settings
+target
+target/
+/target
+.classpath
+.project
+pom.xml
