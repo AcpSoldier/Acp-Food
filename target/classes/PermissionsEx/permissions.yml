@@ -1,9 +1,0 @@
-groups:
-  default:
-    options:
-      default: true
-    permissions:
-    - acpfood.other.refill
-    - acpfood.foods.*
-schema-version: 1
-users: {}
