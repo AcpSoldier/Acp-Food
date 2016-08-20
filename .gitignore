@@ -20,3 +20,5 @@ target/classes/com/acpsoldier/acpfood/food/FoodManager.class
 *.class
 target/classes/com/acpsoldier/acpfood/food/FoodManager.class
 *.class
+*.class
+target/classes/com/acpsoldier/acpfood/Events.class

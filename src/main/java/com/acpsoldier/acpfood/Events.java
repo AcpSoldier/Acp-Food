@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -19,13 +20,13 @@ public class Events implements Listener {
 	FoodManager foodManager;
 
 	public Events(AcpFood acpFood) {
-		
+
 		this.acpFood = acpFood;
 		foodManager = new FoodManager(acpFood);
 	}
 
 	@EventHandler
-	
+
 	public void onPlayerEat(PlayerInteractEvent e) {
 		if (acpFood.isPluginEnabled) {
 
@@ -37,10 +38,11 @@ public class Events implements Listener {
 
 					if (p.getItemInHand().hasItemMeta()) {
 						if (p.getItemInHand().getItemMeta().equals(food.getFood().getItemMeta())) {
-							
+
 							food.eatFood(p);
 
-							// Prevents Mountain Dew from behaving like bone meal.
+							// Prevents Mountain Dew from behaving like bone
+							// meal.
 							if (food.equals(FoodManager.mountainDew)) {
 								e.setCancelled(true);
 							}
@@ -48,8 +50,8 @@ public class Events implements Listener {
 					}
 				}
 			}
-			
-			if(acpFood.turnItemsIntoFood) {
+
+			if (acpFood.turnItemsIntoFood) {
 				for (ItemStack item : p.getInventory().getContents()) {
 					if (item != null) {
 						for (Food food : FoodManager.foods) {
@@ -75,7 +77,7 @@ public class Events implements Listener {
 	// Turns Item entities into food.
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
-		
+
 		if (acpFood.isPluginEnabled && acpFood.turnItemsIntoFood) {
 
 			Item item = e.getItem();
@@ -100,7 +102,7 @@ public class Events implements Listener {
 	// Turns ItemStacks into food.
 	@EventHandler
 	public void onInventoryOpen(InventoryOpenEvent e) {
-		
+
 		if (acpFood.isPluginEnabled && acpFood.turnItemsIntoFood) {
 			for (ItemStack item : e.getInventory().getContents()) {
 				if (item != null) {
@@ -120,6 +122,17 @@ public class Events implements Listener {
 					}
 				}
 			}
+		}
+	}
+
+	// Give apple eaters invincibility.
+	@EventHandler
+	public void onPlayerDamage(EntityDamageEvent e) {
+		
+		Player p = (Player) e.getEntity();
+		
+		if (((e.getEntity() instanceof Player)) && (FoodManager.appleEaters.contains(p))) {
+			e.setCancelled(true);
 		}
 	}
 }
