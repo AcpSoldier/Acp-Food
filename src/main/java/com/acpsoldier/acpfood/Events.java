@@ -128,13 +128,12 @@ public class Events implements Listener {
 	// Give apple eaters invincibility.
 	@EventHandler
 	public void onPlayerDamage(EntityDamageEvent e) {
-		
-		if (acpFood.isPluginEnabled) {
+		if(e.getEntity() instanceof Player && acpFood.isPluginEnabled) {
 			Player p = (Player) e.getEntity();
 			
 			if (((e.getEntity() instanceof Player)) && (FoodManager.appleEaters.contains(p))) {
 				e.setCancelled(true);
-			}	
+			}		
 		}
 	}
 	
