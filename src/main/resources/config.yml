@@ -15,6 +15,9 @@
 Settings:
 # Enables/Disables the plugin.
   Enabled: true
+  
+# This will simply let you know if there is an update avaliable. If there is, you can do /acpfood update to download it.
+  AutoUpdate: true
 
 # The maximum hunger (saturation) a player can have.
   MaxHunger: 20

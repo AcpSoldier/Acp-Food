@@ -22,3 +22,4 @@ target/classes/com/acpsoldier/acpfood/food/FoodManager.class
 *.class
 *.class
 target/classes/com/acpsoldier/acpfood/Events.class
+src/main/java/net/gravitydevelopment/updater/Updater.java

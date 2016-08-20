@@ -117,8 +117,7 @@ public class FoodManager {
 
 						if (p.getInventory().contains(food.getFood().getType(), 1)) {
 
-							ItemStack newFood = p.getInventory()
-									.getItem(p.getInventory().first(food.getFood().getType()));
+							ItemStack newFood = p.getInventory().getItem(p.getInventory().first(food.getFood().getType()));
 							p.getInventory().remove(newFood);
 							p.setItemInHand(newFood);
 
