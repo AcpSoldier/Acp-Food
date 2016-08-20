@@ -8,8 +8,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import com.acpsoldier.acpfood.food.Food;
 import com.acpsoldier.acpfood.food.FoodManager;
@@ -17,12 +19,10 @@ import com.acpsoldier.acpfood.food.FoodManager;
 public class Events implements Listener {
 
 	AcpFood acpFood;
-	FoodManager foodManager;
 
 	public Events(AcpFood acpFood) {
 
 		this.acpFood = acpFood;
-		foodManager = new FoodManager(acpFood);
 	}
 
 	@EventHandler
@@ -129,10 +129,27 @@ public class Events implements Listener {
 	@EventHandler
 	public void onPlayerDamage(EntityDamageEvent e) {
 		
-		Player p = (Player) e.getEntity();
-		
-		if (((e.getEntity() instanceof Player)) && (FoodManager.appleEaters.contains(p))) {
-			e.setCancelled(true);
+		if (acpFood.isPluginEnabled) {
+			Player p = (Player) e.getEntity();
+			
+			if (((e.getEntity() instanceof Player)) && (FoodManager.appleEaters.contains(p))) {
+				e.setCancelled(true);
+			}	
+		}
+	}
+	
+	// Disables absorption.
+	@EventHandler
+	public void onPlayerConsume(PlayerItemConsumeEvent e) {
+		if (acpFood.isPluginEnabled) {
+			
+			Player p = e.getPlayer();
+			
+			if(p.hasPotionEffect(PotionEffectType.ABSORPTION) || p.hasPotionEffect(PotionEffectType.REGENERATION) || FoodManager.appleEaters.contains(p)) {
+				p.removePotionEffect(PotionEffectType.ABSORPTION);
+				p.removePotionEffect(PotionEffectType.REGENERATION);
+				e.setCancelled(true);
+			}
 		}
 	}
 }
