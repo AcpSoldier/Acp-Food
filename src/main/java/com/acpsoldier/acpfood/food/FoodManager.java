@@ -151,10 +151,10 @@ public class FoodManager {
 							w.playSound(p.getLocation(), Sound.DRINK, 1.0f, 1.0f);
 							break;
 						case 4:
-							w.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 0.5f, 1.5f);
+							w.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1.0f, 1.5f);
 							break;
 						case 5:
-							w.playSound(p.getLocation(), Sound.WITHER_SPAWN, 0.5f, 1.5f);
+							w.playSound(p.getLocation(), Sound.WITHER_SPAWN, 1.0f, 3.5f);
 							break;
 						default:
 							w.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
@@ -173,10 +173,10 @@ public class FoodManager {
 							p.playSound(p.getLocation(), Sound.DRINK, 1.0f, 1.0f);
 							break;
 						case 4:
-							p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 0.5f, 1.5f);
+							p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1.0f, 1.5f);
 							break;
 						case 5:
-							p.playSound(p.getLocation(), Sound.WITHER_SPAWN, 0.5f, 1.5f);
+							p.playSound(p.getLocation(), Sound.WITHER_SPAWN, 1.0f, 3.5f);
 							break;
 						default:
 							p.playSound(p.getLocation(), Sound.BURP, 1.0f, 1.0f);
@@ -194,6 +194,9 @@ public class FoodManager {
 					break;
 				case "Golden Apple":
 					p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, GoldenApple.invincibilityTime, 0));
+					ItemStack iteminHand = p.getItemInHand();
+					p.getItemInHand().setType(Material.AIR);
+					p.setItemInHand(iteminHand); // This should fix the actual eating of the golden apple. I don't think people want apple eaters to get absorption.
 					break;
 			}
 
@@ -224,8 +227,7 @@ public class FoodManager {
 		foodData.set("Settings.PlaySound", food.playSound);
 		foodData.set("Settings.Sound", food.sound);
 
-		// Special foods get special settings :) Don't you wish you were a
-		// special food?
+		// Special foods get special settings :) Don't you wish you were a special food?
 		switch (food.fileName) {
 			case "Sugar":
 				foodData.set("Settings.SpeedTime", Sugar.speedTime);
@@ -233,6 +235,7 @@ public class FoodManager {
 				break;
 			case "Golden Apple":
 				foodData.set("Settings.InvincibilityTime", GoldenApple.invincibilityTime);
+				foodData.set("Settings.PlayExpireSound", GoldenApple.playExpireSound);
 				break;	
 		}
 
