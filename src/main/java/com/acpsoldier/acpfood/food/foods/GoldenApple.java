@@ -17,18 +17,16 @@ import com.acpsoldier.acpfood.AcpFood;
 import com.acpsoldier.acpfood.food.Food;
 import com.acpsoldier.acpfood.food.FoodManager;
 
-public class Sugar extends Food {
+public class GoldenApple extends Food {
 
 	AcpFood acpFood;
 	
-	//The default speed time when the plugin is first installed.
-	public static int speedTime = 60;
-	//The default speed level when the plugin is first installed.
-	public static int speedLevel = 0;
+	//The default invincibility time when the plugin is first installed.
+	public static int invincibilityTime = 60;
+	
+	public GoldenApple(AcpFood acpFood) {
 
-	public Sugar(AcpFood acpFood) {
-
-		super("Sugar", 0, 0, "&8Right click to eat!", "", "&9Speed Sugar", true, 4, "acpfood.foods.sugar");
+		super("Golden Apple", 20, 20, "&8Consume for temporary invincibility!", "", "&6&lGolden Apple", true, 5, "acpfood.foods.goldenapple");
 		this.acpFood = acpFood;
 		File foodFile = foodManager.getFoodFile(this);
 		FileConfiguration foodData = YamlConfiguration.loadConfiguration(foodFile);
@@ -43,8 +41,7 @@ public class Sugar extends Food {
 			this.playSound = foodData.getBoolean("Settings.PlaySound");
 			this.sound = foodData.getInt("Settings.Sound");
 			
-			Sugar.speedTime = foodData.getInt("Settings.SpeedTime");
-			Sugar.speedLevel = foodData.getInt("Settings.SpeedLevel");
+			GoldenApple.invincibilityTime = foodData.getInt("Settings.InvincibilityTime");
 		}
 		else {
 			
@@ -57,24 +54,24 @@ public class Sugar extends Food {
 	@Override
 	public void eatFood(Player p) {
 		
-		if(!FoodManager.sugarEaters.contains(p)) {
-			foodManager.eatFood(p, FoodManager.sugar, acpFood);
+		if(!FoodManager.appleEaters.contains(p)) {
+			foodManager.eatFood(p, FoodManager.goldenApple, acpFood);
 			
-			FoodManager.sugarEaters.add(p);
+			FoodManager.appleEaters.add(p);
 			
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 			scheduler.scheduleSyncDelayedTask(acpFood, new Runnable() {
 				public void run() {
-					FoodManager.sugarEaters.remove(p);
+					FoodManager.appleEaters.remove(p);
 				}
-			}, speedTime);
+			}, invincibilityTime);
 		}
 	}
 
 	@Override
 	public ItemStack getFood() {
 
-		ItemStack is = new ItemStack(Material.SUGAR);
+		ItemStack is = new ItemStack(Material.GOLDEN_APPLE);
 		ItemMeta im = is.getItemMeta();
 		ArrayList<String> lore = new ArrayList<String>();
 

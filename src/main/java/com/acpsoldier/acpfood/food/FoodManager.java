@@ -21,6 +21,7 @@ import com.acpsoldier.acpfood.AcpFood;
 import com.acpsoldier.acpfood.food.foods.CannedBeans;
 import com.acpsoldier.acpfood.food.foods.CannedFish;
 import com.acpsoldier.acpfood.food.foods.CannedPasta;
+import com.acpsoldier.acpfood.food.foods.GoldenApple;
 import com.acpsoldier.acpfood.food.foods.MountainDew;
 import com.acpsoldier.acpfood.food.foods.Pepsi;
 import com.acpsoldier.acpfood.food.foods.Sugar;
@@ -39,6 +40,7 @@ public class FoodManager {
 	public static Pepsi pepsi;
 	public static MountainDew mountainDew;
 	public static Sugar sugar;
+	public static GoldenApple goldenApple;
 
 	public static ArrayList<Food> foods = new ArrayList<Food>();
 	public static ArrayList<Player> playersThatCantEat = new ArrayList<Player>();
@@ -55,6 +57,7 @@ public class FoodManager {
 			pepsi = new Pepsi(acpFood);
 			mountainDew = new MountainDew(acpFood);
 			sugar = new Sugar(acpFood);
+			goldenApple = new GoldenApple(acpFood);
 
 			foods.add(cannedBeans);
 			foods.add(cannedPasta);
@@ -62,6 +65,7 @@ public class FoodManager {
 			foods.add(pepsi);
 			foods.add(mountainDew);
 			foods.add(sugar);
+			foods.add(goldenApple);
 		}
 		else {
 
@@ -71,6 +75,7 @@ public class FoodManager {
 			pepsi = new Pepsi(acpFood);
 			mountainDew = new MountainDew(acpFood);
 			sugar = new Sugar(acpFood);
+			goldenApple = new GoldenApple(acpFood);
 
 			foods.clear();
 			foods.add(cannedBeans);
@@ -79,6 +84,7 @@ public class FoodManager {
 			foods.add(pepsi);
 			foods.add(mountainDew);
 			foods.add(sugar);
+			foods.add(goldenApple);
 		}
 		acpFood.reloadConfiguration(); // TODO: For some reason I have to run
 										// this method again for the main config
@@ -185,6 +191,8 @@ public class FoodManager {
 					break;
 				case "Sugar":
 					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Sugar.speedTime, Sugar.speedLevel));
+				case "Golden Apple":
+					p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, GoldenApple.invincibilityTime, 10));
 			}
 
 			FoodManager.playersThatCantEat.add(p);
@@ -218,18 +226,19 @@ public class FoodManager {
 		// special food?
 		switch (food.fileName) {
 			case "Sugar":
-
 				foodData.set("Settings.SpeedTime", Sugar.speedTime);
 				foodData.set("Settings.SpeedLevel", Sugar.speedLevel);
 				break;
+			case "Golden Apple":
+				foodData.set("Settings.InvincibilityTime", GoldenApple.invincibilityTime);
+				break;	
 		}
 
 		try {
 			foodData.save(foodFile);
 		}
 		catch (IOException e) {
-			acpFood.getLogger().severe("Failed to edit the '" + food.fileName
-					+ "' file. This should never happen. If it does happen, I'm pretty sure it's not my fault! :(");
+			acpFood.getLogger().severe("Failed to edit the '" + food.fileName + "' file. This should never happen. If it does happen, I'm pretty sure it's not my fault! :(");
 			e.printStackTrace();
 		}
 

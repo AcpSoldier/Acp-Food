@@ -3,7 +3,7 @@ version: ${project.version}
 main: com.acpsoldier.acpfood.AcpFood
 commands:
   acpfood:
-    description: The main command for AcpFood.  Type it for a list of commands.
+    description: Type this command to see the version of Acp Food this server is running.
 permissions:
   acpfood.other.refill:
     description: Players with this permission can auto-refill food.
@@ -20,4 +20,6 @@ permissions:
   acpfood.foods.pepsi:
     description: Players with this permission can drink Pepsi.
   acpfood.foods.sugar:
+    description: Players with this permission can eat Sugar.
+  acpfood.foods.goldenapple:
     description: Players with this permission can eat Sugar.
