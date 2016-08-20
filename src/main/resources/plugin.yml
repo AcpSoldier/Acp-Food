@@ -5,7 +5,11 @@ commands:
   acpfood:
     description: Type this command to see the version of Acp Food this server is running.
 permissions:
-  acpfood.other.refill:
+  acpfood.reload:
+    description: Players with this permission can reload all the food files.
+  acpfood.update:
+    description: Players with this permission download updates.
+  acpfood.refill:
     description: Players with this permission can auto-refill food.
   acpfood.foods.*:
     description: Players with this permission can eat all foods.
@@ -22,4 +26,4 @@ permissions:
   acpfood.foods.sugar:
     description: Players with this permission can eat Sugar.
   acpfood.foods.goldenapple:
-    description: Players with this permission can eat Sugar.
+    description: Players with this permission can eat Golden Apple.
